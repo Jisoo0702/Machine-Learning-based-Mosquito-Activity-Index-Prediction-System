@@ -50,8 +50,6 @@ README 작성
 
 ```plaintext
 project/
-├─ README/
-│  └─ README.md
 ├─ data/
 │  └─ mosquito_activity_data.csv
 ├─ EDA/
@@ -59,6 +57,7 @@ project/
 ├─ modeling/
 │  ├─ random_forest_model.ipynb
 │  ├─ xgboost_model.ipynb
-│  └─ lightgbm_model.ipynb
-└─ conclusion/
-   └─ model_comparison_and_result.ipynb
+│  ├─ Regression_model.ipynb
+│  └─ LGBM_model.ipynb
+├─  conclusion
+└─ README.md
