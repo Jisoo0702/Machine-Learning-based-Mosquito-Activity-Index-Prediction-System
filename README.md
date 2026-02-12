@@ -1,80 +1,64 @@
-머신러닝 기반 모기 활동 지수 예측 시스템
-기후 변화로 인한 모기 매개 감염병 증가 문제에 대응하기 위해,
-기후 및 대기 데이터를 분석하여 모기 활동 지수(MAI)를 예측하고
-기존 서울시 모기 예보 시스템의 정확도를 개선하는 머신러닝 예측 모델이다.
+# 모기활동지수 예측 고도화를 위한 머신러닝 기반 예측 시스템
 
-서울시 기후·대기 데이터는 기상청 및 서울시 대기환경정보 API를 활용하여 수집하였으며,
-모기 활동 지수는 서울시 보건환경연구원의 모기 포집 데이터를 기반으로 구축하였다.
+기존의 단순 기상 변수 기반 모기활동지수 예측 방식의 한계를 개선하고,  
+보다 정밀하고 일반화 성능이 높은 예측 모델을 개발하기 위한  
+머신러닝 기반 모기활동지수 예측 시스템이다.
 
-Pipeline Overview
-기후·대기 데이터 (23개 변수)
-→ 데이터 전처리 (결측치 대체, 단위 표준화)
-→ EDA 및 상관관계 분석
-→ 피처 엔지니어링 (파생 변수 생성)
-→ Train/Test 분할
+기상 데이터 및 환경 데이터를 활용하여  
+모기 활동에 영향을 미치는 주요 요인을 분석하고,  
+Random Forest, XGBoost, LightGBM 등 앙상블 모델을 통해  
+기존 예측 시스템 대비 성능을 향상시키는 것을 목표로 한다.
 
-머신러닝 모델링
-→ 다중회귀, KNN, Random Forest, LGBM, XGBoost
-→ GridSearchCV/RandomizedSearchCV를 활용한 하이퍼파라미터 최적화
-→ 모델 성능 비교 (R², RMSE)
-→ XGBoost 최종 모델 선정 (R² 0.95, RMSE 48.4)
+본 연구는 단순 통계 기반 예측을 넘어  
+비선형 관계와 변수 간 상호작용을 반영한 모델을 구축함으로써  
+기존 예측 체계를 개선하기 위한 모델 개발에 초점을 둔다.
 
-변수 중요도 분석
-→ 0.5m 지중온도(0.5UT), 아황산가스(SDC), 이산화질소(NDC) 등
-→ 기존 예보에서 고려하지 않은 새로운 영향 요인 도출
+---
 
-인사이트 도출
-→ 서울시 모기 예보 정확도 72% → 95%로 개선 가능성 입증
-→ 킬러모기 방생 최적 조건: 봄·여름(3-8월), 밤 10시-새벽 2시
-→ 대기오염 농도 높은 하천·공원·인구밀집 지역 우선 방생 제안
+## Pipeline Overview
 
-Key Features
-기상청, 서울시 대기환경정보, 보건환경연구원 데이터 통합 구축
+README 작성  
+→ 데이터 수집 및 정리  
+→ EDA (탐색적 데이터 분석)  
+→ Feature Engineering  
+→ 머신러닝 모델링  
+→ 성능 비교 및 개선  
+→ 결론 도출
 
-23개 기후·대기 변수 기반 머신러닝 예측 모델링
+---
 
-5가지 회귀 모델 비교 분석 및 XGBoost 최적화
+## Key Features
+- 기상 및 환경 데이터 기반 모기활동지수 예측
+- 탐색적 데이터 분석(EDA)을 통한 변수 영향도 분석
+- Random Forest, XGBoost, LightGBM 모델 비교
+- RMSE, R² 기반 모델 성능 평가
+- 기존 예측 방식 대비 성능 개선 모델 제안
 
-변수 중요도 분석을 통한 핵심 영향 요인 도출
+---
 
-미국 플로리다주 벤치마킹을 통한 킬러모기 방생 전략 제시
+## Tech Stack
+- Python
+- Pandas, NumPy
+- Matplotlib, Seaborn
+- Scikit-learn
+- XGBoost
+- LightGBM
 
-기존 서울시 모기 예보 시스템 대비 23%p 정확도 향상 검증
+---
 
-Tech Stack
-Python 3.10
+## Directory Structure
 
-Pandas, NumPy
-
-Matplotlib, Seaborn
-
-Scikit-learn (GridSearchCV, Cross Validation)
-
-XGBoost, LightGBM
-
-Jupyter Notebook, Google Colab
-
-Directory Structure
-plaintext
-mosquito-activity-prediction/
+```plaintext
+project/
+├─ README/
+│  └─ README.md
 ├─ data/
-│  └─ mosquito_final_air_data.csv
-├─ notebooks/
-│  ├─ 01_EDA.ipynb
-│  ├─ 02_Preprocessing.ipynb
-│  └─ 03_Modeling.ipynb
-├─ preprocessing/
-│  └─ data_cleaning.py
+│  └─ mosquito_activity_data.csv
+├─ EDA/
+│  └─ exploratory_analysis.ipynb
 ├─ modeling/
-│  ├─ regression_models.ipynb
-│  ├─ random_forest.ipynb
-│  ├─ xgboost_optimization.ipynb
-│  └─ feature_importance.ipynb
-├─ visualization/
-│  ├─ correlation_heatmap.png
-│  ├─ feature_importance.png
-│  └─ killer_mosquito_map.png
-├─ results/
-│  ├─ model_performance.csv
-│  └─ best_params.txt
-└─ README.md
+│  ├─ random_forest_model.ipynb
+│  ├─ xgboost_model.ipynb
+│  └─ lightgbm_model.ipynb
+└─ conclusion/
+   └─ model_comparison_and_result.ipynb
